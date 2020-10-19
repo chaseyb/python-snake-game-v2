@@ -1,4 +1,5 @@
 import pygame
+import time 
 import random
 import pickle
 
@@ -8,12 +9,18 @@ pygame.init()
 # Color definitions 
 white = (255,255,255)
 black = (0,0,0)
+red = (255, 0, 0)
 
 # Game property constants
 display_width = 800
 display_height = 600
 blockSize = 20
 FPS = 30
+font = pygame.font.SysFont(None, 25)
+
+def message_to_screen (msg,color):
+    screen_text = font.render(msg, True, color)
+    gameDisplay.blit(screen_text, [display_width/2, display_height/2])
 
 # Game display window 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
@@ -66,6 +73,8 @@ while not gameExit:
     # Defines game FPS
     clock.tick(FPS)
 
-
+message_to_screen("You Lose", red)
+pygame.display.update() 
+time.sleep(2)
 pygame.quit()
 quit()

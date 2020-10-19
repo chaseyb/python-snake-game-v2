@@ -25,6 +25,7 @@ clock = pygame.time.Clock()
 
 # Main game loop
 while not gameExit:
+    # Defines snake movement 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameExit = True
@@ -42,6 +43,9 @@ while not gameExit:
                 lead_y_change = 10
                 lead_x_change = 0
 
+    # Defines window boundary
+    if lead_x >= 800 or lead_x < 0 or lead_y >= 600 or lead_y < 0:
+        gameExit = True 
     
     lead_x += lead_x_change
     lead_y += lead_y_change
@@ -51,7 +55,7 @@ while not gameExit:
     # Updates game display
     pygame.display.update() 
     # Defines game FPS
-    clock.tick(15)
+    clock.tick(30)
 
 
 pygame.quit()

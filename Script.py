@@ -1,13 +1,21 @@
 import pygame
+import random
+import pickle  # pickle is used for high score saving
 
 # Starts game 
 pygame.init()
 
+# Color definitions 
 white = (255,255,255)
 black = (0,0,0)
 
+# Game property constants
+display_width = 800
+display_height = 600
+blockSize = 20
+
 # Game display window 
-gameDisplay = pygame.display.set_mode((800,600))
+gameDisplay = pygame.display.set_mode((display_width,display_height))
 
 # Updates game
 pygame.display.update()

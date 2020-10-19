@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 # Game display window 
-gameDisplay = game.display.set_mode((800,600))
+gameDisplay = pygame.display.set_mode((800,600))
 
 #updates game
 pygame.display.update()
@@ -14,7 +14,8 @@ gameExit = False
 
 while not gameExit:
     for event in pygame.event.get():
-        print(event)
+        if event.type == pygame.QUIT:
+            gameExit = True 
 
 # quits game 
 pygame.quit()

@@ -21,6 +21,8 @@ lightGreen = (74, 196, 74)
 display_width = 800
 display_height = 600
 blockSize = 20
+centerDisplayWidth = displayWidth / 2
+centerDisplayHeight = displayHeight / 2
 font = pygame.font.SysFont(None, 25)
 
 FPS = 13

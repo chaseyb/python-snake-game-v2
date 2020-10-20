@@ -36,7 +36,18 @@ bodyFont = pygame.font.SysFont("comicsansms", 50)
 buttonFont = pygame.font.SysFont("comicsansms", 25)
 
 # Game display window 
-gameDisplay = pygame.display.set_mode((display_width,display_height))
+gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
+pygame.display.set_caption("Snake")
+pygame.display.set_icon(icon)
+clock = pygame.time.Clock()
+
+startButton = Button.button(green, lightGreen, gameDisplay, "START", centerDisplayWidth - (buttonWidth / 2),
+                            centerDisplayHeight - 30, buttonWidth, buttonHeight, white, -30, centerDisplayWidth,
+                            centerDisplayHeight, buttonFont)
+
+quitButton = Button.button(red, lightRed, gameDisplay, "QUIT", centerDisplayWidth - (buttonWidth / 2),
+                           centerDisplayHeight + 50, buttonWidth, buttonHeight, white, 50, centerDisplayWidth,
+                           centerDisplayHeight, buttonFont)
 
 def startScreen():
     """

@@ -120,6 +120,17 @@ def randomApple():
 
     goldenApple = generateGoldenApple()
 
+    randAppleX = round(random.randint(blockSize * 2, boundX - (blockSize * 4)) / blockSize) * blockSize
+    randAppleY = round(random.randint(blockSize * 2, boundY - (blockSize * 4)) / blockSize) * blockSize
+
+    while [randAppleX, randAppleY] in snakeList or randAppleX == lastAppleX or randAppleY == lastAppleY or \
+            (randAppleX >= scoreBoundWidth and randAppleY <= scoreBoundHeight):
+        # if the apple generates under the snake or within the high score box, regenerate it
+        randAppleX = round(random.randint(blockSize * 2, boundX - scoreBoundWidth - (blockSize * 4)) / blockSize) * \
+                     blockSize
+        randAppleY = round(random.randint(blockSize * 2, boundY - scoreBoundHeight - (blockSize * 4)) / blockSize) * \
+                     blockSize
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

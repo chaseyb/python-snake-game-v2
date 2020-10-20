@@ -24,6 +24,13 @@ blockSize = 20
 FPS = 30
 font = pygame.font.SysFont(None, 25)
 
+# Importing images
+snakeHeadImage = pygame.image.load("images/SnakeHead.png")
+snakeBodyImage = pygame.image.load("images/SnakeBody.png")
+appleImage = pygame.image.load("images/Apple.png")
+goldenAppleImage = pygame.image.load("images/GoldenApple.png")
+icon = pygame.image.load("images/Icon.png")
+
 # Game display window 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 

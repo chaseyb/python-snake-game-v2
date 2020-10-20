@@ -23,9 +23,11 @@ display_height = 600
 blockSize = 20
 centerDisplayWidth = displayWidth / 2
 centerDisplayHeight = displayHeight / 2
-font = pygame.font.SysFont(None, 25)
 
+# Game speed
 FPS = 13
+
+# Game variables
 
 # Importing images
 snakeHeadImage = pygame.image.load("images/SnakeHead.png")
@@ -103,6 +105,20 @@ def showScores(score, new):
         high_score = pygame.font.SysFont("comicsansms", 13).render("New High Score!", True, red)
 
     gameDisplay.blit(high_score, (displayWidth - scoreOffsetX, scoreOffsetY))
+
+def randomApple():
+    """
+    This function handles the random apple generation.
+    :return:
+    """
+    global randAppleX
+    global randAppleY
+    global goldenApple
+
+    lastAppleX = randAppleX
+    lastAppleY = randAppleY
+
+    goldenApple = generateGoldenApple()
 
 # Updates game
 pygame.display.update()

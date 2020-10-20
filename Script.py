@@ -83,6 +83,24 @@ def startScreen():
 
         pygame.display.update()
 
+
+def showScores(score, new):
+    """
+    This function displays the scores on the display.
+    :param score:
+    :param new:
+    :return:
+    """
+    screen_text = pygame.font.SysFont("comicsansms", 15).render("Score: " + str(score), True, black)
+    gameDisplay.blit(screen_text, (displayWidth - scoreOffsetX, scoreOffsetY + 20))
+
+    high_score = pygame.font.SysFont("comicsansms", 15).render("High Score: " + str(highScore), True, black)
+
+    if new:
+        high_score = pygame.font.SysFont("comicsansms", 13).render("New High Score!", True, red)
+
+    gameDisplay.blit(high_score, (displayWidth - scoreOffsetX, scoreOffsetY))
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

@@ -49,6 +49,15 @@ quitButton = Button.button(red, lightRed, gameDisplay, "QUIT", centerDisplayWidt
                            centerDisplayHeight + 50, buttonWidth, buttonHeight, white, 50, centerDisplayWidth,
                            centerDisplayHeight, buttonFont)
 
+# High score loading
+try:
+    with open('score.dat', 'rb') as file:
+        highScore = pickle.load(file)
+except:
+    highScore = 0
+    with open('score.dat', 'wb') as file:
+        pickle.dump(highScore, file)
+
 def startScreen():
     """
     This function loads the start screen of the game.

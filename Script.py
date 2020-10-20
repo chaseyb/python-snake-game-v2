@@ -31,6 +31,10 @@ appleImage = pygame.image.load("images/Apple.png")
 goldenAppleImage = pygame.image.load("images/GoldenApple.png")
 icon = pygame.image.load("images/Icon.png")
 
+# Importing font
+bodyFont = pygame.font.SysFont("comicsansms", 50)
+buttonFont = pygame.font.SysFont("comicsansms", 25)
+
 # Game display window 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 

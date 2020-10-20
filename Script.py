@@ -34,6 +34,31 @@ icon = pygame.image.load("images/Icon.png")
 # Game display window 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
+def startScreen():
+    """
+    This function loads the start screen of the game.
+    :return:
+    """
+    while True:
+        fillBackground(True)
+        put_message_custom("Welcome to Snake!", green, -80)
+
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                quitProgram()
+
+        startButton.showButton()
+        quitButton.showButton()
+
+        if startButton.isHovered(getCursorPos()) and isLeftMouseClicked():
+            reset()
+            return
+        elif quitButton.isHovered(getCursorPos()) and isLeftMouseClicked():
+            quitProgram()
+
+        pygame.display.update()
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

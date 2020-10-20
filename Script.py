@@ -1,15 +1,21 @@
 import pygame
 import time 
 import random
+import os
 import pickle
 
 # Starts game 
 pygame.init()
+# Centers the game window 
+os.envirson['SDL_VIDEO_CENTERED'] = '1' 
 
 # Color definitions 
 white = (255,255,255)
 black = (0,0,0)
 red = (255, 0, 0)
+lightRed = (249, 52, 52)
+green = (0, 155, 0)
+lightGreen = (74, 196, 74)
 
 # Game property constants
 display_width = 800
@@ -17,10 +23,6 @@ display_height = 600
 blockSize = 20
 FPS = 30
 font = pygame.font.SysFont(None, 25)
-
-def message_to_screen (msg,color):
-    screen_text = font.render(msg, True, color)
-    gameDisplay.blit(screen_text, [display_width/2, display_height/2])
 
 # Game display window 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
@@ -39,7 +41,13 @@ lead_y_change = 0
 
 clock = pygame.time.Clock()
 
+# Game Over message 
+def message_to_screen (msg,color):
+    screen_text = font.render(msg, True, color)
+    gameDisplay.blit(screen_text, [display_width/2, display_height/2])
+
 # Main game loop
+def gameLoop():
 while not gameExit:
     # Defines snake movement 
     for event in pygame.event.get():

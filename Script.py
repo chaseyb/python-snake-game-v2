@@ -18,11 +18,17 @@ green = (0, 155, 0)
 lightGreen = (74, 196, 74)
 
 # Game property constants
-display_width = 800
-display_height = 600
 blockSize = 20
+displayWidth = 800
+displayHeight = 600
 centerDisplayWidth = displayWidth / 2
 centerDisplayHeight = displayHeight / 2
+boundX = displayWidth - (blockSize * 2)
+boundY = displayHeight - (blockSize * 2)
+scoreOffsetX = 140
+scoreOffsetY = 27
+scoreBoundWidth = displayWidth - 180
+scoreBoundHeight = 100 - blockSize
 
 # Game speed
 FPS = 13
@@ -35,9 +41,10 @@ leadX = centerDisplayWidth
 leadY = centerDisplayHeight
 leadXChange = blockSize
 leadYChange = 0
+appleCounter = 0
+highScore = 0
 buttonWidth = 150
 buttonHeight = 50
-highScore = 0
 snakeList = []
 
 # Importing images
@@ -254,62 +261,99 @@ def gameLoop():
 
     randomApple()
 
-# Updates game
-pygame.display.update()
-pygame.display.set_caption('Snake Game')
+while True:
+        events = pygame.event.get()
+        fillBackground(False)
 
-gameExit = False
+        while gameOver:  # the user lost
+            if highScore < appleCounter:
+                # set new high score if applicable
+                with open('score.dat', 'rb') as fromFile:
+                    highScore = pickle.load(fromFile)
+                with open('score.dat', 'wb') as fromFile:
+                    pickle.dump(appleCounter, fromFile)
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.QUIT:
+                    quitProgram()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    reset()
+                    gameLoop()
+            fillBackground(False)
+            showScores(appleCounter, highScore < appleCounter)
+            put_message_center("Game Over!", red)
+            put_message_custom("Click to play again.", black, fontSize=30, offsetY=50)
+            pygame.display.update()
 
-lead_x = display_height/2
-lead_y = display_width/2
+        for event in events:
+            if event.type == pygame.QUIT:
+                quitProgram()
+            if event.type == pygame.KEYDOWN:  # key presses
+                if (len(snakeList) < 2 or degrees != 270) and (event.key == pygame.K_LEFT or event.key == pygame.K_a):
+                    leadXChange = -blockSize
+                    leadYChange = 0
+                    degrees = 90
+                elif (len(snakeList) < 2 or degrees != 90) and (event.key == pygame.K_RIGHT or event.key == pygame.K_d):
+                    leadXChange = blockSize
+                    leadYChange = 0
+                    degrees = 270
+                elif (len(snakeList) < 2 or degrees != 180) and (event.key == pygame.K_UP or event.key == pygame.K_w):
+                    leadYChange = -blockSize
+                    leadXChange = 0
+                    degrees = 0
+                elif (len(snakeList) < 2 or degrees != 0) and (event.key == pygame.K_DOWN or event.key == pygame.K_s):
+                    leadYChange = blockSize
+                    leadXChange = 0
+                    degrees = 180
+                elif event.key == pygame.K_p:
+                    pause()
 
-lead_x_change = 0
-lead_y_change = 0
+        leadX += leadXChange
+        leadY += leadYChange
 
-clock = pygame.time.Clock()
+        if leadX == randAppleX and leadY == randAppleY:  # if the snake has eaten the apple
+            if goldenApple:
+                appleCounter += 3
+            else:
+                appleCounter += 1
+            randomApple()
 
-# Game Over message 
-def message_to_screen (msg,color):
-    screen_text = font.render(msg, True, color)
-    gameDisplay.blit(screen_text, [display_width/2, display_height/2])
+        snakeHead = [leadX, leadY]  # updates the snake's head location
 
-# Main game loop
-def gameLoop():
-while not gameExit:
-    # Defines snake movement 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            gameExit = True
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                lead_x_change = -blockSize
-                lead_y_change = 0
-            elif event.key == pygame.K_RIGHT:
-                lead_x_change = blockSize
-                lead_y_change = 0
-            elif event.key == pygame.K_UP:
-                lead_y_change = -blockSize
-                lead_x_change = 0
-            elif event.key == pygame.K_DOWN:
-                lead_y_change = blockSize
-                lead_x_change = 0
+        # checks if a golden apple should be generated
+        if goldenApple:
+            gameDisplay.blit(goldenAppleImage, (randAppleX, randAppleY))
+        else:
+            gameDisplay.blit(appleImage, (randAppleX, randAppleY))
 
-    # Defines window boundary
-    if lead_x >= display_width or lead_x < 0 or lead_y >= display_height or lead_y < 0:
-        gameExit = True 
-    
-    lead_x += lead_x_change
-    lead_y += lead_y_change
-    # Defines game background
-    gameDisplay.fill(white)
-    pygame.draw.rect(gameDisplay, black, [lead_x,lead_y,blockSize,blockSize])
-    # Updates game display
-    pygame.display.update() 
-    # Defines game FPS
-    clock.tick(FPS)
+        # condition checking if the snake has run into itself or gone out of bounds
+        if snakeHead in snakeList[:-1] or \
+                (leadX > boundX or leadX < blockSize or leadY > boundY or leadY < blockSize) \
+                or (leadX >= scoreBoundWidth and leadY <= scoreBoundHeight):
+            gameOver = True
 
-message_to_screen("You Lose", red)
-pygame.display.update() 
-time.sleep(2)
-pygame.quit()
-quit()
+        snakeList.append(snakeHead)  # add the snakeHead
+        snake(snakeList)  # generate the snake
+
+        if len(snakeList) > appleCounter:  # delete the first element of the snakeList.
+            del snakeList[0]
+
+        with open('score.dat', 'rb') as fromFile:  # load high score
+            highScore = pickle.load(fromFile)
+
+        showScores(appleCounter, highScore < appleCounter)
+        pygame.display.update()
+        clock.tick(FPS + (appleCounter / 90))  # set FPS, scales with how many apples the user has
+
+
+def getCursorPos():
+    return pygame.mouse.get_pos()
+
+
+def isLeftMouseClicked():
+    return pygame.mouse.get_pressed()[0]
+
+
+while True:
+    startScreen()
+    gameLoop()

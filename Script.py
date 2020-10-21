@@ -1,8 +1,8 @@
 import pygame
-import time 
 import random
 import os
 import pickle
+import Button
 
 # Starts game 
 pygame.init()

@@ -133,6 +133,13 @@ def randomApple():
         randAppleY = round(random.randint(blockSize * 2, boundY - scoreBoundHeight - (blockSize * 4)) / blockSize) * \
                      blockSize
 
+def generateGoldenApple():
+    """
+    This function returns if a golden apple should be generated or not.
+    :return:
+    """
+    return random.randint(1, 15) == 1
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

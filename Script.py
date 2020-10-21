@@ -206,6 +206,32 @@ def fillBackground(isStartScreen):
         gameDisplay.fill(black, [scoreBoundWidth, blockSize, displayWidth - 150, scoreBoundHeight])
         gameDisplay.fill(white, [(scoreBoundWidth + blockSize, blockSize), (blockSize * 7, 100 - (blockSize * 2))])
 
+def reset():
+    """
+    This function resets all the variables to their default value (i.e. starting a new game)
+    :return:
+    """
+    global appleCounter
+    global degrees
+    global highScore
+    global leadX
+    global leadY
+    global leadXChange
+    global leadYChange
+    global randAppleX
+    global randAppleY
+    global snakeList
+    global goldenApple
+
+    degrees = 270
+    leadX = centerDisplayWidth
+    leadY = centerDisplayHeight
+    leadXChange = blockSize
+    leadYChange = 0
+    randAppleX, randAppleY, appleCounter = (0,) * 3
+    snakeList = []
+    goldenApple = generateGoldenApple()
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

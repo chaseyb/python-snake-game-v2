@@ -19,8 +19,8 @@ lightGreen = (74, 196, 74)
 
 # Game property constants
 blockSize = 20
-displayWidth = 800
-displayHeight = 600
+displayWidth = 1000
+displayHeight = 800
 centerDisplayWidth = displayWidth / 2
 centerDisplayHeight = displayHeight / 2
 boundX = displayWidth - (blockSize * 2)

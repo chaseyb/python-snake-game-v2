@@ -124,6 +124,23 @@ def showScores(score, new):
 
     gameDisplay.blit(high_score, (displayWidth - scoreOffsetX, scoreOffsetY))
 
+def pause():
+    """
+    This function handles the paused event.
+    :return:
+    """
+    while True:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                quitProgram()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                return
+
+        put_message_center("Game Paused", black, )
+        put_message_custom("Click to resume..", black, fontSize=30, offsetY=50)
+        pygame.display.update()
+
 def randomApple():
     """
     This function handles the random apple generation.
@@ -305,8 +322,6 @@ while True:
                     leadYChange = blockSize
                     leadXChange = 0
                     degrees = 180
-                elif event.key == pygame.K_p:
-                    pause()
 
         leadX += leadXChange
         leadY += leadYChange

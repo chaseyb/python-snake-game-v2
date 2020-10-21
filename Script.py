@@ -164,6 +164,19 @@ def put_message_center(message, color):
     gameDisplay.blit(screen_text, [centerDisplayWidth - (screen_text.get_rect().width / 2), centerDisplayHeight -
                                    (screen_text.get_rect().height / 2)])
 
+def put_message_custom(message, color, offsetY, fontSize=50):
+    """
+    This function puts a message on the screen based off an offset to the center.
+    :param message:
+    :param color:
+    :param offsetY:
+    :param fontSize:
+    :return:
+    """
+    screen_text = pygame.font.SysFont("comicsansms", fontSize).render(message, True, color)
+    gameDisplay.blit(screen_text, [centerDisplayWidth - (screen_text.get_rect().width / 2),
+                                   (centerDisplayHeight - (screen_text.get_rect().height / 2) + offsetY)])
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

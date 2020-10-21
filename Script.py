@@ -28,8 +28,15 @@ centerDisplayHeight = displayHeight / 2
 FPS = 13
 
 # Game variables
+degrees = 270
 randAppleX, randAppleY = (0,) * 2
 goldenApple = random.randint(1, 10) == 10
+leadX = centerDisplayWidth
+leadY = centerDisplayHeight
+leadXChange = blockSize
+leadYChange = 0
+highScore = 0
+snakeList = []
 
 # Importing images
 snakeHeadImage = pygame.image.load("images/SnakeHead.png")

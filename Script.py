@@ -60,7 +60,7 @@ buttonFont = pygame.font.SysFont("comicsansms", 25)
 
 # Game display window 
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-pygame.display.set_caption("Snake")
+pygame.display.set_caption("Snake V2 by Chaseyb")
 pygame.display.set_icon(icon)
 clock = pygame.time.Clock()
 

@@ -35,6 +35,8 @@ leadX = centerDisplayWidth
 leadY = centerDisplayHeight
 leadXChange = blockSize
 leadYChange = 0
+buttonWidth = 150
+buttonHeight = 50
 highScore = 0
 snakeList = []
 
@@ -45,7 +47,7 @@ appleImage = pygame.image.load("images/Apple.png")
 goldenAppleImage = pygame.image.load("images/GoldenApple.png")
 icon = pygame.image.load("images/Icon.png")
 
-# Importing font
+# Importing fonts
 bodyFont = pygame.font.SysFont("comicsansms", 50)
 buttonFont = pygame.font.SysFont("comicsansms", 25)
 

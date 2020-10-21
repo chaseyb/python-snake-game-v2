@@ -194,6 +194,18 @@ def quitProgram():
     pygame.quit()
     exit()
 
+def fillBackground(isStartScreen):
+    """
+    This function fills the game display background.
+    :return:
+    """
+    gameDisplay.fill(black)
+    gameDisplay.fill(white, [blockSize, blockSize, boundX, boundY])
+
+    if not isStartScreen:
+        gameDisplay.fill(black, [scoreBoundWidth, blockSize, displayWidth - 150, scoreBoundHeight])
+        gameDisplay.fill(white, [(scoreBoundWidth + blockSize, blockSize), (blockSize * 7, 100 - (blockSize * 2))])
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

@@ -153,6 +153,17 @@ def snake(snakeCoors):
     for coor in snakeCoors[:-1]:
         gameDisplay.blit(snakeBodyImage, [coor[0], coor[1]])
 
+def put_message_center(message, color):
+    """
+    This function displays a message in the center of the screen.
+    :param message:
+    :param color:
+    :return:
+    """
+    screen_text = bodyFont.render(message, True, color)
+    gameDisplay.blit(screen_text, [centerDisplayWidth - (screen_text.get_rect().width / 2), centerDisplayHeight -
+                                   (screen_text.get_rect().height / 2)])
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

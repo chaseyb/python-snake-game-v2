@@ -232,6 +232,28 @@ def reset():
     snakeList = []
     goldenApple = generateGoldenApple()
 
+def gameLoop():
+    """
+    This is the main game loop, called by startScreen() earlier.
+    :return:
+    """
+    global appleCounter
+    global degrees
+    global highScore
+    global leadX
+    global leadY
+    global leadXChange
+    global leadYChange
+    global snakeList
+    global goldenApple
+    global FPS
+    leadXChange = blockSize
+    leadYChange = 0
+    gameOver = False
+    goldenApple = generateGoldenApple()
+
+    randomApple()
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

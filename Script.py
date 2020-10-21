@@ -278,7 +278,7 @@ def gameLoop():
 
     randomApple()
 
-while True:
+    while True:
         events = pygame.event.get()
         fillBackground(False)
 
@@ -322,6 +322,8 @@ while True:
                     leadYChange = blockSize
                     leadXChange = 0
                     degrees = 180
+                elif event.key == pygame.K_p:
+                    pause()
 
         leadX += leadXChange
         leadY += leadYChange

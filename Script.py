@@ -140,6 +140,19 @@ def generateGoldenApple():
     """
     return random.randint(1, 15) == 1
 
+def snake(snakeCoors):
+    """
+    This function handles blitting the snake and rotating the head of the snake.
+    :param snakeCoors:
+    :return:
+    """
+    rotatedHead = pygame.transform.rotate(snakeHeadImage, degrees)
+
+    gameDisplay.blit(rotatedHead, (snakeCoors[-1][0], snakeCoors[-1][1]))
+
+    for coor in snakeCoors[:-1]:
+        gameDisplay.blit(snakeBodyImage, [coor[0], coor[1]])
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

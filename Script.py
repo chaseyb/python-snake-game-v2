@@ -177,6 +177,14 @@ def put_message_custom(message, color, offsetY, fontSize=50):
     gameDisplay.blit(screen_text, [centerDisplayWidth - (screen_text.get_rect().width / 2),
                                    (centerDisplayHeight - (screen_text.get_rect().height / 2) + offsetY)])
 
+def quitProgram():
+    """
+    This function quits the program.
+    :return:
+    """
+    pygame.quit()
+    exit()
+
 # Updates game
 pygame.display.update()
 pygame.display.set_caption('Snake Game')

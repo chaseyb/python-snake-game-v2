@@ -7,7 +7,7 @@ import Button
 # Starts game 
 pygame.init()
 # Centers the game window 
-os.envirson['SDL_VIDEO_CENTERED'] = '1' 
+os.environ['SDL_VIDEO_CENTERED'] = '1' 
 
 # Color definitions 
 white = (255,255,255)
